@@ -5,11 +5,12 @@ import Playlist from './components/Playlist';
 
 function App() {
   return (
-    <div className="App">
-      <h1> I am Jammming</h1>
+    <div className='app' >
+      <h1 className='h1'> I am Jammming</h1>
       <SearchBar />
       <SearchResults />
       <Playlist />
+      <p></p>
     </div>
   );
 }
