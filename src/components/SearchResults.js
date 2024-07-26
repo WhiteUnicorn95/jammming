@@ -5,7 +5,7 @@ import Tracklist from './Tracklist';
 function SearchResults({songs}) {
     return <div className = {styles.maindiv}>
         <h2>Results</h2>
-        <Tracklist songs={songs} />
+        <Tracklist songs={songs} addButton={true} removeButton={false} />
     </div>;
 };
 
