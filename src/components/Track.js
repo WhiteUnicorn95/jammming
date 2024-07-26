@@ -9,7 +9,6 @@ function Track({song}) {
             <li>Album : {song.album}</li>
         </ul>
     </>
-
 };
 
 export default Track;
