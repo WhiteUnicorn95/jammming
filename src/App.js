@@ -5,8 +5,6 @@ import SearchResults from './components/SearchResults';
 import Playlist from './components/Playlist';
 
 function App() {
-  const [songs, setSongs] = useState([]);
-
   const mockSongs = [
     {
       "title" : "First Song",
@@ -24,8 +22,8 @@ function App() {
       "album" : "Third Album"
     }
   ];
-
-  setSongs(mockSongs);
+  
+  const [songs, setSongs] = useState(mockSongs);
 
   return (
     <div className='app' >
