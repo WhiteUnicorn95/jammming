@@ -59,12 +59,20 @@ function App() {
     }));
   };
 
+  const removeSongFromPlaylist = (songToRemove) => {
+    const updatedPlaylist = {
+      ...playlist,
+      songs: playlist.songs.filter((song) => song !== songToRemove)
+    };
+    setPlaylist(updatedPlaylist);
+  };
+
   return (
     <div className='app' >
       <h1 className='h1'> I am Jammming</h1>
       <SearchBar />
       <SearchResults results={results} addSongToPlaylist={addSongToPlaylist} />
-      <Playlist playlist={playlist} />
+      <Playlist playlist={playlist} removeSongFromPlaylist={removeSongFromPlaylist} />
     </div>
   );
 }

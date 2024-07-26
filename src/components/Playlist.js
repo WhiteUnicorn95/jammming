@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './Playlist.module.css';
 import Tracklist from './Tracklist';
 
-function Playlist({playlist}) {
+function Playlist({playlist, removeSongFromPlaylist}) {
 
     return <div className = {styles.maindiv}>
         <h2>{playlist.name}</h2>
-        <Tracklist songs={playlist.songs} addButton={false} removeButton={true} />
+        <Tracklist songs={playlist.songs} addButton={false} removeButton={true} removeSongFromPlaylist={removeSongFromPlaylist} />
         <button>Save to Spotify</button>
     </div>;
 };
