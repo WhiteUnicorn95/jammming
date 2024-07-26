@@ -1,17 +1,13 @@
 import React from 'react';
 import styles from './SearchResults.module.css';
+import Track from './Track';
 
 function SearchResults({songs}) {
     return <div className = {styles.maindiv}>
-        <h2>Search Results</h2>
-        <p>Here will be the tracklist made of tracks of the resulting search</p>
+        <h2>Results</h2>
         {songs.map(
             song => (
-                <ul>
-                    <li>Title : {song.title}</li>
-                    <li>Artist : {song.artist}</li>
-                    <li>Album : {song.album}</li>
-                </ul>
+                <Track song={song} />
             )
         )}
     </div>;
