@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './SearchResults.module.css';
 import Tracklist from './Tracklist';
 
-function SearchResults({songs}) {
+function SearchResults({results, addSongToPlaylist}) {
     return <div className = {styles.maindiv}>
         <h2>Results</h2>
-        <Tracklist songs={songs} addButton={true} removeButton={false} />
+        <Tracklist songs={results} addButton={true} removeButton={false} addSongToPlaylist={addSongToPlaylist} />
     </div>;
 };
 

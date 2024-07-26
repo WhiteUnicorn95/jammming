@@ -25,7 +25,7 @@ function App() {
     }
   ];
   
-  const [songs, setSongs] = useState(mockSongs);
+  const [results, setResults] = useState(mockSongs);
 
   /*Initialize the playlist data with a playList useState */
   const mockPlaylist = {
@@ -52,11 +52,18 @@ function App() {
 
   const [playlist, setPlaylist] = useState(mockPlaylist);
 
+  const addSongToPlaylist = (song) => {
+    setPlaylist((prevPlaylist) => ({
+      ...prevPlaylist,
+      songs: [...prevPlaylist.songs, song]
+    }));
+  };
+
   return (
     <div className='app' >
       <h1 className='h1'> I am Jammming</h1>
       <SearchBar />
-      <SearchResults songs={songs} />
+      <SearchResults results={results} addSongToPlaylist={addSongToPlaylist} />
       <Playlist playlist={playlist} />
     </div>
   );
