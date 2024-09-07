@@ -72,7 +72,7 @@ function App() {
       <h1 className='h1'> I am Jammming</h1>
       <SearchBar />
       <SearchResults results={results} addSongToPlaylist={addSongToPlaylist} />
-      <Playlist playlist={playlist} removeSongFromPlaylist={removeSongFromPlaylist} />
+      <Playlist playlist={playlist} setPlaylist={setPlaylist} removeSongFromPlaylist={removeSongFromPlaylist} />
     </div>
   );
 }
