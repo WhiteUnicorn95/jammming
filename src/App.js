@@ -11,17 +11,20 @@ function App() {
     {
       "title" : "First Song",
       "artist" : "First Artist",
-      "album" : "First Album"
+      "album" : "First Album",
+      "uri" : "spotify:track:aaahFgbbKwnb9MLmUQDhG6"
     },
     {
       "title" : "Second Song",
       "artist" : "Second Artist",
-      "album" : "Second Album"
+      "album" : "Second Album",
+      "uri" : "spotify:track:bbbbFgbbKwnb9MLmUQDhG6"
     },
     {
       "title" : "Third Song",
       "artist" : "Third Artist",
-      "album" : "Third Album"
+      "album" : "Third Album",
+      "uri" : "spotify:track:ccchFgbbKznb9MLmUQDhG6"
     }
   ];
   
@@ -34,17 +37,20 @@ function App() {
         {
           "title": "First Song",
           "artist": "First Artist",
-          "album": "First Album"
+          "album": "First Album",
+          "uri" : "spotify:track:dddhFgbcKznb9MLmUQDhG6"
         },
         {
           "title": "Third Song",
           "artist": "Third Artist",
-          "album": "Third Album"
+          "album": "Third Album",
+          "uri" : "spotify:track:eeehFgbbKznb9MLmUQDhG6"
         },
         {
           "title": "Second Song",
           "artist": "Second Artist",
-          "album": "Second Album"
+          "album": "Second Album",
+          "uri" : "spotify:track:fffhFgbbKznb9MLmUQDhG6"
         }
       ]
     }
