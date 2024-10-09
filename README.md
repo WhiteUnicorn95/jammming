@@ -24,7 +24,7 @@ Jammming is a React web application that allows users to search the Spotify libr
 ## Getting Started
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/jammming.git
+   git clone https://github.com/WhiteUnicorn95/jammming.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -34,7 +34,9 @@ Jammming is a React web application that allows users to search the Spotify libr
    ```bash
    npm install
    ```
-4. Start the application:
+4. Create a .env file in the root of the project:
+   copy either `.env.development` or `.env.production` and change values where appropriate
+5. Start the application:
    ```bash
    npm start
    ```
