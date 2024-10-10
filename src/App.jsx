@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults';
 import Playlist from './components/Playlist';
+import AccessToken from './components/AccessToken';
 
 function App() {
 
@@ -73,10 +74,14 @@ function App() {
     setPlaylist(updatedPlaylist);
   };
 
+  AccessToken().then(response => {
+      console.log(response)
+  });
+
   return (
     <div className='app' >
       <h1 className='h1'> I am Jammming</h1>
-      <SearchBar />
+      <SearchBar setResults={setResults} />
       <SearchResults results={results} addSongToPlaylist={addSongToPlaylist} />
       <Playlist playlist={playlist} setPlaylist={setPlaylist} removeSongFromPlaylist={removeSongFromPlaylist} />
     </div>
