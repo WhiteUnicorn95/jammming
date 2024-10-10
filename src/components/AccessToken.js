@@ -13,6 +13,8 @@ async function AccessToken() {
         'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret),
       },
     });
+
+    console.log(client_id, client_secret, 'potato');
   
     return await response.json();
 };

@@ -6,7 +6,7 @@ var client_secret = process.env.REACT_APP_CLIENT_SECRET;
 
 function SearchBar({setResults}) {
 
-    async function loadData() {
+    /*async function loadData() {
         try {
             const response = await fetch('https://accounts.spotify.com/api/token', {
                 method: 'GET',
@@ -25,11 +25,11 @@ function SearchBar({setResults}) {
           } catch (error) {
             console.error(error.message);
           }
-    };
+    };*/
 
     return <>
     <input id='searchBar' type='text'></input>
-    <button id='searchButton' onClick={loadData()} >Search</button>
+    <button id='searchButton' /*onClick={loadData}*/ >Search</button>
     </>;
 };
 
