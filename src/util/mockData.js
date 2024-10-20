@@ -21,9 +21,7 @@ export const mockSongs = [
     }
   ];
 
-export const mockPlaylist = {
-    "name": "My First Playlist",
-    "songs": [
+export const mockPlaylistTracks = [
       {
         "title": "First Song",
         "artist": "First Artist",
@@ -43,5 +41,3 @@ export const mockPlaylist = {
         "uri" : "spotify:track:fffhFgbbKznb9MLmUQDhG6"
       }
     ]
-  }
-;

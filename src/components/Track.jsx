@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Track.module.css';
 
-function Track({song, addButton, removeButton, addSongToPlaylist, removeSongFromPlaylist}) {
+function Track({song, addButton, removeButton, onAddSong, onRemoveSong}) {
 
     return <>
         <ul>
@@ -10,8 +10,8 @@ function Track({song, addButton, removeButton, addSongToPlaylist, removeSongFrom
             <li>Album : {song.album}</li>
         </ul>
 
-        {addButton && <button onClick={() => addSongToPlaylist(song)} >Add</button> }
-        {removeButton && (<button onClick={() => removeSongFromPlaylist(song)}>Remove</button>)}
+        {addButton && <button onClick={() => onAddSong(song)} >Add</button> }
+        {removeButton && (<button onClick={() => onRemoveSong(song)}>Remove</button>)}
         </>
     };
 

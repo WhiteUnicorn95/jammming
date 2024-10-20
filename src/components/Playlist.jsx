@@ -2,39 +2,18 @@ import React, {useState} from 'react';
 import styles from './Playlist.module.css';
 import Tracklist from './Tracklist';
 
-function Playlist({playlist, setPlaylist, removeSongFromPlaylist}) {
+function Playlist({playlistTracks, playlistName, onNameUpdate, onRemoveSong, onSave}) {
 
-    const handleOnChange = (event) => {
-
-        setPlaylist((prevPlaylist) => ({
-            ...prevPlaylist,
-            name: event.target.value
-          }));
-    };
-
-    const handleOnBlur = (event) => {
-        setPlaylist((prevPlaylist) => ({
-            ...prevPlaylist,
-            name: event.target.value
-          }));
-    };
-
-    const handleSave = () => {
-        setPlaylist({
-            "name": "",
-            "songs": []
-          });
-    };
+    const handleNameUpdate = (event) => onNameUpdate(event.target.value);
 
     return <div className = {styles.maindiv}>
         <input
           type="text"
-          value={playlist.name}
-          onChange={handleOnChange}
-          onBlur={handleOnBlur}
+          value={playlistName}
+          onChange={handleNameUpdate}
         />
-        <Tracklist songs={playlist.songs} addButton={false} removeButton={true} removeSongFromPlaylist={removeSongFromPlaylist} />
-        <button onClick={handleSave}>Save to Spotify</button>
+        <Tracklist songs={playlistTracks} addButton={false} removeButton={true} onRemoveSong={onRemoveSong} />
+        <button onClick={onSave}>Save to Spotify</button>
     </div>;
 };
 
