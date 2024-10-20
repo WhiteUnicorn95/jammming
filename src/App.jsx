@@ -1,63 +1,23 @@
+// import css and React
 import './App.css';
 import React, {useState} from 'react';
+
+// import components
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults';
 import Playlist from './components/Playlist';
-import AccessToken from './components/AccessToken';
+
+// import utilities
+import {mockSongs, mockPlaylist} from './util/mockData';
+import GetAccessToken from './util/GetAccessToken';
 
 function App() {
-
-  /*Initialize the songs of the search results as songs with a UseState */
-  const mockSongs = [
-    {
-      "title" : "First Song",
-      "artist" : "First Artist",
-      "album" : "First Album",
-      "uri" : "spotify:track:aaahFgbbKwnb9MLmUQDhG6"
-    },
-    {
-      "title" : "Second Song",
-      "artist" : "Second Artist",
-      "album" : "Second Album",
-      "uri" : "spotify:track:bbbbFgbbKwnb9MLmUQDhG6"
-    },
-    {
-      "title" : "Third Song",
-      "artist" : "Third Artist",
-      "album" : "Third Album",
-      "uri" : "spotify:track:ccchFgbbKznb9MLmUQDhG6"
-    }
-  ];
   
+  // initialize the useStates
   const [results, setResults] = useState(mockSongs);
-
-  /*Initialize the playlist data with a playList useState */
-  const mockPlaylist = {
-      "name": "My First Playlist",
-      "songs": [
-        {
-          "title": "First Song",
-          "artist": "First Artist",
-          "album": "First Album",
-          "uri" : "spotify:track:dddhFgbcKznb9MLmUQDhG6"
-        },
-        {
-          "title": "Third Song",
-          "artist": "Third Artist",
-          "album": "Third Album",
-          "uri" : "spotify:track:eeehFgbbKznb9MLmUQDhG6"
-        },
-        {
-          "title": "Second Song",
-          "artist": "Second Artist",
-          "album": "Second Album",
-          "uri" : "spotify:track:fffhFgbbKznb9MLmUQDhG6"
-        }
-      ]
-    }
-  ;
-
   const [playlist, setPlaylist] = useState(mockPlaylist);
+
+  // functions to handle actions
 
   const addSongToPlaylist = (song) => {
     setPlaylist((prevPlaylist) => ({
@@ -73,10 +33,6 @@ function App() {
     };
     setPlaylist(updatedPlaylist);
   };
-
-  AccessToken().then(response => {
-      console.log(response)
-  });
 
   return (
     <div className='app' >
