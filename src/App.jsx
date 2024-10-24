@@ -1,6 +1,6 @@
 // import css and React
 import './App.css';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 // import components
 import SearchBar from './components/SearchBar';
@@ -9,7 +9,7 @@ import Playlist from './components/Playlist';
 
 // import utilities
 import {mockSongs, mockPlaylistTracks} from './util/MockData';
-import GetAccessToken from './util/Spotify';
+import {Spotify, accessToken} from './util/Spotify';
 
 function App() {
   
@@ -42,6 +42,19 @@ function App() {
   const savePlaylistToSpotify = (playlist) => {
     // add logic to save to spotify + pass in playlist 
   };
+
+  useEffect(() => {
+    const checkState = window.location.href.match(/state=([^&]*)/)
+    
+    // si le search param state est dans l'URI, on cherche le code, sinon on redirige vers Spotify pour authentification
+
+    if (checkState !== null) {
+      const code = Spotify.getCode();
+      console.log('We execute getCode.')
+    } else (
+      Spotify.getAuthorization()
+    );
+  }, [])
 
   return (
     <div className='app' >
