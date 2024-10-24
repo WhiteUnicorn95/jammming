@@ -5,27 +5,6 @@ var client_secret = process.env.REACT_APP_CLIENT_SECRET;
 let accessToken = '';
 let state = 'gmzoivscdiuetFZBFEKjzUVDYwi';
 
-/*async function GetAccessToken() {
-    
-    //const authorization_response = 
-
-    // client credentials flow
-    const response = await fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
-      body: new URLSearchParams({
-        'grant_type': 'client_credentials',
-      }),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret),
-      },
-    });
-
-    console.log(client_id, client_secret);
-  
-    return await response.json();
-};*/
-
 const Spotify = {
 
   // function redirects user to Spotify to ask for permission, comes back to main page with state and code
@@ -59,6 +38,7 @@ const Spotify = {
     //gets code
     const codeMatch = window.location.href.match(/code=([^&]*)/);
     const code = codeMatch[1];
+    console.log('code : ', code);
 
       //gets state
     const stateMatch = window.location.href.match(/state=([^&]*)/)
@@ -66,13 +46,61 @@ const Spotify = {
 
     // checks if states match
     if (state === stateUrl) {
-      console.log("States do match");
+      //console.log("States do match");
       return code;
     } else {
       console.log("States don't match: state", state, "/ state dans url", stateUrl);
     };
-  
   },
+
+  getAccessToken() {
+    //don't execute if accessToken is already present
+      // no idea if this condition works or has been used ever by the computer
+    if (accessToken !== '') { 
+      console.log('AccessToken was already set')
+      return accessToken
+    };
+
+    const code = Spotify.getCode();
+    const redirect_uri= 'http://localhost:3000/';
+
+    return fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      body: new URLSearchParams({
+        'grant_type': 'authorization_code',
+        'code': code,
+        'redirect_uri': redirect_uri
+      }),
+      headers: {
+        'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret),
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    }).then(response => {
+      if (!response.ok) {
+        return response.text().then(text => {
+          console.log('Error response body:', text); // Log the response body for debugging
+          throw new Error('Network response was not ok');
+        });
+      }
+        return response.json(); 
+      }
+    ).then(
+      jsonData => {
+        if (!jsonData.access_token) {
+          console.log('Access token missing in response:', jsonData); // Log the entire jsonData for debugging
+          throw new Error('Access token missing in response');
+        }
+
+        accessToken = jsonData.access_token;
+        console.log('jsonData response', jsonData);
+        console.log('accessToken from json :', accessToken);
+        return accessToken;
+      }
+    ).catch(error => {
+      console.log('Error fetching access token:', error);
+      throw error; }
+    );
+  }
 };
 
 export {Spotify};

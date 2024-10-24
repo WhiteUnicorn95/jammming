@@ -17,6 +17,7 @@ function App() {
   const [results, setResults] = useState(mockSongs);
   const [playlistTracks, setPlaylistTracks] = useState(mockPlaylistTracks);
   const [playlistName, setPlaylistName] = useState("My New Playlist");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // functions to handle actions
   const search = (term) => {
@@ -44,17 +45,38 @@ function App() {
   };
 
   useEffect(() => {
-    const checkState = window.location.href.match(/state=([^&]*)/)
+    const checkState = window.location.href.match(/state=([^&]*)/);
+    const accessTokenUrl = window.location.href.match(/access_token=([^&]*)/);
     
     // si le search param state est dans l'URI, on cherche le code, sinon on redirige vers Spotify pour authentification
+    if (checkState !== null && isLoggedIn == false) {
+      console.log('We execute getAccessToken.');
+      const responsegetAccessToken = Spotify.getAccessToken()
+      /*.then((response) => {
+        if (response.access_token) {
+          console.log('Access token received:', response.access_token);
+          setIsLoggedIn(true);  // Now that we have the token, set login status to true
 
-    if (checkState !== null) {
-      const code = Spotify.getCode();
-      console.log('We execute getCode.')
-    } else (
+          // Clear the code from the URL after successful token fetch
+          window.history.replaceState({}, document.title, "/");
+
+          return response;
+        } else {
+          console.error('Access token missing in response:', response);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching access token:', error);
+      });*/
+
+      console.log('accessToken from App : ', responsegetAccessToken);
+
+      
+    } else {
       Spotify.getAuthorization()
-    );
-  }, [])
+    };
+
+  }, [isLoggedIn])
 
   return (
     <div className='app' >
