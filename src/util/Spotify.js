@@ -100,6 +100,47 @@ const Spotify = {
       console.log('Error fetching access token:', error);
       throw error; }
     );
+  },
+
+  // NEED TO PROCESS THE RESPONSE - gets proper response
+  searchTerm(term) {
+    const token = Spotify.getAccessToken();
+    const redirect_uri= 'http://localhost:3000/';
+    const searchUrl = new URL('https://api.spotify.com/v1/search');
+
+    searchUrl.searchParams.append('q', term);
+    searchUrl.searchParams.append('type', 'track');
+    searchUrl.searchParams.append('limit', 10);
+
+    return fetch( searchUrl , {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token
+      },
+    }).then(response => {
+      if (!response.ok) {
+        return response.text().then(text => {
+          console.log('Error response body:', text); // Log the response body for debugging
+          throw new Error('Network response was not ok in get search term');
+        });
+      }
+        return response.json(); 
+      }
+    ).then(jsonResponse => {
+      if (!jsonResponse.tracks) {
+        return [];
+      }
+
+      console.log('json data from search term : ', jsonResponse)
+
+      return jsonResponse.tracks.items.map(track => ({
+        name: track.name,
+        artist: track.artists[0].name,
+        album: track.album.name,
+        uri: track.uri,
+        id: track.id,
+      }));
+    });
   }
 };
 

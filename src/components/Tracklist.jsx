@@ -7,7 +7,7 @@ function Tracklist({songs, addButton, removeButton, onAddSong, onRemoveSong}) {
     return <>
         {songs.map(
             song => (
-                <Track key={Math.random().toString(16).slice(2)} song={song} addButton={addButton} removeButton={removeButton} onAddSong={onAddSong} onRemoveSong={onRemoveSong} />
+                <Track key={song.uri} song={song} addButton={addButton} removeButton={removeButton} onAddSong={onAddSong} onRemoveSong={onRemoveSong} />
             )
         )}
     </>

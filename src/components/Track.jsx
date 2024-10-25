@@ -5,7 +5,7 @@ function Track({song, addButton, removeButton, onAddSong, onRemoveSong}) {
 
     return <>
         <ul>
-            <li>Title : {song.title}</li>
+            <li>Title : {song.name}</li>
             <li>Artist : {song.artist}</li>
             <li>Album : {song.album}</li>
         </ul>

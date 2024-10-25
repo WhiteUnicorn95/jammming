@@ -22,6 +22,7 @@ function App() {
   // functions to handle actions
   const search = (term) => {
     // add logic calling Spotify.js to search with a term
+    Spotify.searchTerm(term).then(setResults);
   };
 
   const updatePlaylistName = (name) => {
@@ -46,12 +47,19 @@ function App() {
 
   useEffect(() => {
     const checkState = window.location.href.match(/state=([^&]*)/);
-    const accessTokenUrl = window.location.href.match(/access_token=([^&]*)/);
     
     // si le search param state est dans l'URI, on cherche le code, sinon on redirige vers Spotify pour authentification
     if (checkState !== null && isLoggedIn == false) {
       console.log('We execute getAccessToken.');
-      const responsegetAccessToken = Spotify.getAccessToken()
+
+      const responsegetAccessToken = Spotify.getAccessToken().then(token => {
+        console.log('Access token received in App:', token);
+        accessToken = token;
+        // Do something with the accessToken
+      }).catch(error => {
+        console.error('Error fetching access token:', error);
+      });
+
       /*.then((response) => {
         if (response.access_token) {
           console.log('Access token received:', response.access_token);
@@ -69,7 +77,7 @@ function App() {
         console.error('Error fetching access token:', error);
       });*/
 
-      console.log('accessToken from App : ', responsegetAccessToken);
+      console.log('general accessToken in App : ', accessToken);
 
       
     } else {
@@ -81,7 +89,10 @@ function App() {
   return (
     <div className='app' >
       <h1 className='h1'> I am Jammming</h1>
-      <SearchBar setResults={setResults} />
+      <SearchBar 
+        setResults={setResults}
+        onSearch={search}
+      />
       <SearchResults
         results={results}
         onAddSong={addSongToPlaylist}
