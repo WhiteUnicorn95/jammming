@@ -17,10 +17,10 @@ function SearchBar({setResults, onSearch}) {
       }, [onSearch, term]);
     ;
 
-    return <>
+    return <div className={styles.maindiv}>
     <input id='searchBar' type='text' onChange={handleTermChange}></input>
     <button id='searchButton' onClick={handleClick}>Search</button>
-    </>;
+    </div>;
 };
 
 export default SearchBar;

@@ -1,3 +1,5 @@
 .maindiv {
     background-color: pink;
+    float: right;
+    width: 50%;
 }

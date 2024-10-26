@@ -1,5 +1,5 @@
 // import css and React
-import './App.css';
+import styles from './App.css';
 import React, {useState, useEffect} from 'react';
 
 // import components
@@ -14,8 +14,8 @@ import {Spotify, accessToken} from './util/Spotify';
 function App() {
   
   // initialize the useStates
-  const [results, setResults] = useState(mockSongs);
-  const [playlistTracks, setPlaylistTracks] = useState(mockPlaylistTracks);
+  const [results, setResults] = useState([]);
+  const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState("My New Playlist");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -30,6 +30,13 @@ function App() {
   };
 
   const addSongToPlaylist = (song) => {
+    const songExists = playlistTracks.some((track) => track.uri === song.uri);
+
+    if (songExists) {
+      console.log('This song is already in the playlist!');
+      return; // Exit the function if the song already exists
+    }
+
     setPlaylistTracks((prevPlaylistTracks) => ([...prevPlaylistTracks, song]
     ));
   };
@@ -43,13 +50,15 @@ function App() {
 
   const savePlaylistToSpotify = (playlist) => {
     // add logic to save to spotify + pass in playlist 
+    const playlistUris = playlistTracks.map((track) => track.uri);
+    Spotify.savePlaylistToSpotify(playlistName, playlistUris);
   };
 
   useEffect(() => {
     const checkState = window.location.href.match(/state=([^&]*)/);
     
     // si le search param state est dans l'URI, on cherche le code, sinon on redirige vers Spotify pour authentification
-    if (checkState !== null && isLoggedIn == false) {
+    if (accessToken == '' && checkState !== null) {
       console.log('We execute getAccessToken.');
 
       const responsegetAccessToken = Spotify.getAccessToken().then(token => {
@@ -94,10 +103,12 @@ function App() {
         onSearch={search}
       />
       <SearchResults
+        className= {styles.SearchResults}
         results={results}
         onAddSong={addSongToPlaylist}
       />
       <Playlist 
+        className= {styles.Playlist}
         playlistTracks={playlistTracks}
         playlistName={playlistName}
         onNameUpdate={updatePlaylistName}

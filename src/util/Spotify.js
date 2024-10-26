@@ -1,3 +1,4 @@
+import Playlist from '../components/Playlist';
 import getRandomString from './getRandomString';
 
 var client_id = process.env.REACT_APP_CLIENT_ID;
@@ -11,7 +12,7 @@ const Spotify = {
   getAuthorization() {
     const redirect_uri= 'http://localhost:3000/';
     const response_type = 'code';
-    const scope = 'playlist-modify-private playlist-modify-public user-read-private';
+    const scope = 'playlist-modify-private playlist-modify-public user-read-private user-read-email';
 
     const authUrl = new URL('https://accounts.spotify.com/authorize')
     
@@ -23,7 +24,7 @@ const Spotify = {
     authUrl.searchParams.append('show_dialog', false);
 
     window.location.href = authUrl;
-    console.log('state envoyé dans getAuthorization', state);
+    console.log('state sent in getAuthorization', state);
   },
 
   // after getAuthorization is done, we get the code and state from url, if the state we received matches the one we sent, returns code
@@ -79,7 +80,7 @@ const Spotify = {
       if (!response.ok) {
         return response.text().then(text => {
           console.log('Error response body:', text); // Log the response body for debugging
-          throw new Error('Network response was not ok');
+          throw new Error('Network response was not ok trying to exchange your code for a token');
         });
       }
         return response.json(); 
@@ -105,7 +106,6 @@ const Spotify = {
   // NEED TO PROCESS THE RESPONSE - gets proper response
   searchTerm(term) {
     const token = Spotify.getAccessToken();
-    const redirect_uri= 'http://localhost:3000/';
     const searchUrl = new URL('https://api.spotify.com/v1/search');
 
     searchUrl.searchParams.append('q', term);
@@ -141,6 +141,75 @@ const Spotify = {
         id: track.id,
       }));
     });
+  },
+
+  savePlaylistToSpotify(name, trackUris) {
+    console.log('you clicked save');
+    const firstCondition = !name;
+    const secondCondition = !trackUris;
+    console.log('first condition :', firstCondition, '. Second condition :', secondCondition);
+    if (!name || !trackUris) {
+      console.log('conditional caught the save');
+      return;
+    }
+
+    const token = Spotify.getAccessToken();
+    let userId; 
+
+    return fetch('https://api.spotify.com/v1/me', {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }).then(response => {
+            
+      if (!response.ok) {
+        return response.text().then(text => {
+          console.log('Error response body:', text); // Log the response body for debugging
+          throw new Error('Network response was not ok in getting current user');
+        });
+      };
+
+      return response.json();}
+    ).then(
+      jsonresponse =>
+        {
+          userId = jsonresponse.id;
+          console.log('jsonresponse to asking for user :', jsonresponse);
+          return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({name: name})
+          }).then(response => {
+            
+            if (!response.ok) {
+              return response.text().then(text => {
+                console.log('Error response body:', text); // Log the response body for debugging
+                throw new Error('Network response was not ok in post playlist name');
+              });
+            };
+
+            return response.json();}
+          ).then(jsonresponse => 
+            {
+              console.log(`json response to posting playlist name :`, jsonresponse);
+              const playlistId = jsonresponse.id;
+              return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+                method: 'POST',
+                headers: {
+                  'Authorization': 'Bearer ' + token,
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({uris: trackUris})
+              })
+            }
+          )
+        }
+    )
+
+
   }
 };
 

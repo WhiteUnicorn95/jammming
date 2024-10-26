@@ -1,3 +1,5 @@
 .maindiv {
     background-color: yellowgreen;
+    float: left;
+    width: 50%;
 }
