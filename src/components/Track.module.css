@@ -1,0 +1,25 @@
+.song{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.description{
+    list-style-type: none;
+    padding-left: 0px;
+    margin-right: 20px;
+    text-align: left;
+    width: 50%;
+}
+
+.addButton, .removeButton{
+    color: #fff;
+    background-color: #9E7BB5;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}

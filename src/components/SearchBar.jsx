@@ -4,7 +4,7 @@ import styles from './SearchBar.module.css';
 var client_id = process.env.REACT_APP_CLIENT_ID;
 var client_secret = process.env.REACT_APP_CLIENT_SECRET;
 
-function SearchBar({setResults, onSearch}) {
+function SearchBar({onSearch}) {
     const [term, setTerm] = useState("");
 
     const handleTermChange = useCallback((event) => {
@@ -18,8 +18,8 @@ function SearchBar({setResults, onSearch}) {
     ;
 
     return <div className={styles.maindiv}>
-    <input id='searchBar' type='text' onChange={handleTermChange}></input>
-    <button id='searchButton' onClick={handleClick}>Search</button>
+    <input className={styles.searchInput} type='text' onChange={handleTermChange}></input>
+    <button className={styles.searchButton} onClick={handleClick}>Search</button>
     </div>;
 };
 

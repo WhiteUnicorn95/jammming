@@ -8,12 +8,14 @@ function Playlist({playlistTracks, playlistName, onNameUpdate, onRemoveSong, onS
 
     return <div className = {styles.maindiv}>
         <input
+          className = {styles.nameInput}
           type="text"
           value={playlistName}
           onChange={handleNameUpdate}
         />
         <Tracklist songs={playlistTracks} addButton={false} removeButton={true} onRemoveSong={onRemoveSong} />
-        <button onClick={onSave}>Save to Spotify</button>
+        <br/>
+        <button className={styles.saveButton} onClick={onSave}>Save to Spotify</button>
     </div>;
 };
 

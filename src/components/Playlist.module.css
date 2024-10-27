@@ -1,5 +1,28 @@
 .maindiv {
-    background-color: pink;
-    float: right;
-    width: 50%;
+    background-color: #DBD4F9;
+    width: 42%;
+    min-height: 500px;
+    border-radius: 30px;
+    padding: 30px;
+}
+
+.nameInput{
+    border: none;
+    border-radius: 10px;
+    height: 30px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.saveButton{
+    color: #fff;
+    background-color: #9E7BB5;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
 }

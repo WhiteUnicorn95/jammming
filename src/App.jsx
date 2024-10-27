@@ -97,24 +97,29 @@ function App() {
 
   return (
     <div className='app' >
-      <h1 className='h1'> I am Jammming</h1>
-      <SearchBar 
-        setResults={setResults}
-        onSearch={search}
-      />
-      <SearchResults
-        className= {styles.SearchResults}
-        results={results}
-        onAddSong={addSongToPlaylist}
-      />
-      <Playlist 
-        className= {styles.Playlist}
-        playlistTracks={playlistTracks}
-        playlistName={playlistName}
-        onNameUpdate={updatePlaylistName}
-        onRemoveSong={removeSongFromPlaylist}
-        onSave={savePlaylistToSpotify}
-      />
+      <div className='header'>
+        <h1 className='h1'>Jammming</h1>
+      </div>
+      <div className='body'>
+        <div className='results'>
+          <SearchBar 
+            onSearch={search}
+          />
+          <SearchResults
+            className= {styles.SearchResults}
+            results={results}
+            onAddSong={addSongToPlaylist}
+          />
+        </div>
+        <Playlist 
+          className= {styles.Playlist}
+          playlistTracks={playlistTracks}
+          playlistName={playlistName}
+          onNameUpdate={updatePlaylistName}
+          onRemoveSong={removeSongFromPlaylist}
+          onSave={savePlaylistToSpotify}
+        />
+      </div>
     </div>
   );
 }
