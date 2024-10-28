@@ -17,7 +17,6 @@
   justify-content:center;
   width: 100%;
   height: 150px;
-  
 }
 
 .h1 {
@@ -30,14 +29,13 @@
   width: 100%;
   align-items: flex-start;
   justify-content: space-evenly;
-
 }
 
 .results {
   background-color: #DBD4F9;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: left;
   width: 42%;
   min-height: 500px;
   border-radius: 30px;

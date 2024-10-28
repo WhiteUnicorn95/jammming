@@ -5,8 +5,8 @@ function Track({song, addButton, removeButton, onAddSong, onRemoveSong}) {
 
     return <div className = {styles.song}>
         <ul className={styles.description}>
-            <li>Title : {song.name}</li>
-            <li>Artist : {song.artist}</li>
+            <li className={styles.title}>{song.name}</li>
+            <li>By {song.artist}</li>
             <li>Album : {song.album}</li>
         </ul>
 

@@ -8,7 +8,6 @@ import SearchResults from './components/SearchResults';
 import Playlist from './components/Playlist';
 
 // import utilities
-import {mockSongs, mockPlaylistTracks} from './util/MockData';
 import {Spotify, accessToken} from './util/Spotify';
 
 function App() {
