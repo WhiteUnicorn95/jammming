@@ -16,7 +16,6 @@ function App() {
   const [results, setResults] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState("My New Playlist");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // functions to handle actions
   const search = (term) => {
@@ -57,10 +56,10 @@ function App() {
     const checkState = window.location.href.match(/state=([^&]*)/);
     
     // si le search param state est dans l'URI, on cherche le code, sinon on redirige vers Spotify pour authentification
-    if (accessToken == '' && checkState !== null) {
+    if (accessToken === '' && checkState !== null) {
       console.log('We execute getAccessToken.');
 
-      const responsegetAccessToken = Spotify.getAccessToken().then(token => {
+      Spotify.getAccessToken().then(token => {
         console.log('Access token received in App:', token);
         accessToken = token;
         // Do something with the accessToken
@@ -92,7 +91,7 @@ function App() {
       Spotify.getAuthorization()
     };
 
-  }, [isLoggedIn])
+  }, [])
 
   return (
     <div className='app' >
