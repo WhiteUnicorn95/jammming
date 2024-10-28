@@ -1,9 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import styles from './SearchBar.module.css';
 
-var client_id = process.env.REACT_APP_CLIENT_ID;
-var client_secret = process.env.REACT_APP_CLIENT_SECRET;
-
 function SearchBar({onSearch}) {
     const [term, setTerm] = useState("");
 

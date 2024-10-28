@@ -1,5 +1,4 @@
-import Playlist from '../components/Playlist';
-import getRandomString from './getRandomString';
+//import getRandomString from './getRandomString';
 
 var client_id = process.env.REACT_APP_CLIENT_ID;
 var client_secret = process.env.REACT_APP_CLIENT_SECRET;
